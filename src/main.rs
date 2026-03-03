@@ -45,7 +45,7 @@ fn ap_loop(config: &Config) {
             _ => {
                 for event in connection.update() {
                     match event {
-                        Event::Connected => { println!("Connected Succesfuly!")}
+                        Event::Connected => { println!("Connected Succesfully!")}
                         Event::Error(err) => {
                             match err {
                                 Error::ClientDisconnected => {
