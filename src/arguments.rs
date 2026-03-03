@@ -8,9 +8,11 @@ pub enum Command {
         /// Matches processes based on name
         #[structopt(short = "n", long)]
         use_process_name: bool,
-
+        /// The process to kill when receiving a deathlink
         target_process: String,
+        /// The host and port of the archipelago server (e.g. archipelago.gg:38281)
         ap_host: String,
+        /// The slot to connect to on the archipelago server (e.g. Player1)
         ap_slot: String,
 
         /// Password for the archipelago server
