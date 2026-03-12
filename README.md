@@ -14,6 +14,7 @@ FLAGS:
     -h, --help                Prints help information
     -V, --version             Prints version information
     -n, --use-process-name    Matches processes based on name
+    -s, --disable-sound       Don't play a sound on death
 
 OPTIONS:
     -p, --ap-pass <ap-pass>   Password for the archipelago server [default: ]

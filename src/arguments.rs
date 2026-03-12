@@ -5,7 +5,7 @@ use structopt::StructOpt;
 pub enum Command {
     /// Connect to Archipelago and monitor a process
     Run {
-        /// Matches processes based on name
+        /// Match processes based on name
         #[structopt(short = "n", long)]
         use_process_name: bool,
         /// The process to kill when receiving a deathlink

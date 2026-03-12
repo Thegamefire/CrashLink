@@ -13,7 +13,6 @@ use crate::audio::AudioManager;
 const SOUND: &[u8] = include_bytes!("death-bell.wav");
 
 fn main() {
-    // const DEATH_SOUND: &[u8] = include_bytes!("death_sound.wav");
     match Command::from_args() {
         Command::Run {
             use_process_name,
