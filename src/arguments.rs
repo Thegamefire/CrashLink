@@ -18,6 +18,10 @@ pub enum Command {
         /// Password for the archipelago server
         #[structopt(short = "p", long, default_value = "")]
         ap_pass: String,
+
+        /// Don't play a sound on death
+        #[structopt(short = "s", long)]
+        disable_sound: bool
     },
 
     /// Lists running processes and exits
@@ -33,4 +37,5 @@ pub struct Config {
     pub ap_host: String,
     pub ap_slot: String,
     pub ap_pass: String,
+    pub disable_sound: bool,
 }

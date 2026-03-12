@@ -1,4 +1,5 @@
 mod arguments;
+mod audio;
 
 use std::ffi::OsStr;
 use std::process::exit;
@@ -7,22 +8,28 @@ use archipelago_rs::{Connection, ConnectionOptions, ConnectionState, Error, Even
 use structopt::StructOpt;
 use sysinfo::System;
 use crate::arguments::{Command, Config};
+use crate::audio::AudioManager;
+
+const SOUND: &[u8] = include_bytes!("death-bell.wav");
 
 fn main() {
+    // const DEATH_SOUND: &[u8] = include_bytes!("death_sound.wav");
     match Command::from_args() {
         Command::Run {
             use_process_name,
             target_process,
             ap_host,
             ap_slot,
-            ap_pass
+            ap_pass,
+            disable_sound,
         } => {
             ap_loop(&Config {
                 use_process_name,
                 target_process,
                 ap_host,
                 ap_slot,
-                ap_pass
+                ap_pass,
+                disable_sound
             })
         }
         Command::ListProcesses => {
@@ -33,7 +40,7 @@ fn main() {
 
 fn ap_loop(config: &Config) {
     let mut connection = new_connection(config);
-
+    let audio = AudioManager::new();
     loop {
         match connection.state() {
             ConnectionState::Disconnected(err) => {
@@ -60,6 +67,9 @@ fn ap_loop(config: &Config) {
                                 }
                             }}
                         Event::DeathLink { cause, source, time, .. } => {
+                            if !config.disable_sound {
+                                audio.play_sound();
+                            }
                             on_death(cause, source, time, config);
                         }
                         _ => { }
